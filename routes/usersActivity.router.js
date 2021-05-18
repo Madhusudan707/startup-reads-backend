@@ -59,6 +59,7 @@ router.route("/user/:id").get(async (req, res) => {
     const id = req.params.id;
     const data = await UsersActivity.findById(id);
     // .populate("wishlist")
+    console.log(data)
     res.json({ success: true, data });
   } catch (err) {
     res.status(500).json({
@@ -102,6 +103,7 @@ router.route("/user/:id/wish/update/:wid").post(async (req, res) => {
       wishlist: _.union(data.wishlist, wid),
     });
     await wishlistData.save();
+    res.json({ success: true, status:200 });
   } catch (err) {
     res.status(500).json({
       success: false,
@@ -120,6 +122,7 @@ router.route("/user/:id/wish/:wid").delete(async (req, res) => {
       wishlist: _.filter(data.wishlist, (wish) => wish.toString() !== wid),
     });
     await wishlistData.save();
+    res.json({ success: true, status:200 });
   } catch (err) {
     res.status(500).json({
       success: false,
@@ -135,7 +138,7 @@ router.route("/cart").post(async (req, res) => {
     const usersActivity = req.body;
     const NewUserActivity = new UsersActivity(usersActivity);
     const savedUserActivity = await NewUserActivity.save();
-    res.json({ success: true, UsersActivity: savedUserActivity });
+    res.json({ success: true, UsersActivity: savedUserActivity, status:200 });
   } catch (err) {
     res
       .status(500)
@@ -198,7 +201,7 @@ router.route("/user/:id/cart/update/:action/:pid").post(async (req, res) => {
         cartData = _.extend(data,{cart:_.concat(data.cart,{count:1,productId:pid})})
       }
       await cartData.save();
-      res.json({success:true})
+      res.json({success:true,status:200})
   } catch (err) {
     res.status(500).json({
       success: false,
@@ -218,7 +221,7 @@ router.route("/user/:id/cart/:pid").delete(async (req, res) => {
     });   
     await cartData.save();
 
-    res.json({success:true})
+    res.json({success:true,status:200})
   } catch (err) {
     res.status(500).json({
       success: false,
