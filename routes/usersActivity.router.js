@@ -58,8 +58,6 @@ router.route("/user/:id").get(async (req, res) => {
   try {
     const id = req.params.id;
     const data = await UsersActivity.findById(id);
-    // .populate("wishlist")
-    console.log(data)
     res.json({ success: true, data });
   } catch (err) {
     res.status(500).json({
