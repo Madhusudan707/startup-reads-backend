@@ -57,7 +57,6 @@ router.route("/wish").post(async (req, res) => {
 router.route("/user/:id").get(async (req, res) => {
   try {
     const id = req.params.id;
-    console.log(id)
     const data = await UsersActivity.findById(id);
     // .populate("wishlist")
     res.json({ success: true, data });

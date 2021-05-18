@@ -25,7 +25,6 @@ router
       const address = req.body;
       const NewAddress = new Address(address);
       const savedAddress = await NewAddress.save();
-      console.log(savedAddress);
       res.json({ success: true, address: savedAddress });
     } catch (err) {
       res

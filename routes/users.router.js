@@ -17,7 +17,6 @@ router.route("/")
         const users = req.body;
         const NewUser = new Users(users)
         const savedUser = await NewUser.save()
-        console.log(savedUser)
         res.json({success:true,users:savedUser})
     }catch(err){
         res.status(500).json({ success: false, message: "unable to register", errorMessage: err.message})

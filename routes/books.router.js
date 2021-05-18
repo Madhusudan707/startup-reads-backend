@@ -8,8 +8,6 @@ router.route("/")
     try{
         const data = await Books.find({})
         res.json({success:true,data})
-        console.log(data)
-
     }catch(err){
         res.status(500).json({success:false,message:"Unable to load books",errorMessage:err.message})
     }
